@@ -29,9 +29,9 @@ var serverSite = http.createServer(function(req, res) {
     '</html>';
 
   res.end(body);
-}).listen(port);
+}).listen(8888);
 
 var server2 = http.createServer(function(req, res) {
   res.writeHead(200);
   res.end('hello word');
-}).listen(8888);
+}).listen(port);
