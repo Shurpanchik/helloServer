@@ -30,8 +30,8 @@ var serverSite = http.createServer(function(req, res) {
 
   res.end(body);
 }).listen(port);
-port = process.env.PORT || 3000;
+
 var server2 = http.createServer(function(req, res) {
   res.writeHead(200);
   res.end('hello word');
-}).listen(port);
+}).listen(8888);
