@@ -34,5 +34,5 @@ var serverSite = http.createServer(function(req, res) {
 */
 var server2 = http.createServer(function(req, res) {
   res.writeHead(200);
-  res.end(port);
+  res.end(port+" "+process.env.IP_ADDRESS);
 }).listen(port);
