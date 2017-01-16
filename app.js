@@ -1,6 +1,7 @@
 var http = require('http');
 var answer = 'YES';
 var port = process.env.PORT || 3000;
+/*
 var serverSite = http.createServer(function(req, res) {
   res.writeHead(200);
   if (req.method == 'POST'){
@@ -30,8 +31,8 @@ var serverSite = http.createServer(function(req, res) {
 
   res.end(body);
 }).listen(8888);
-
+*/
 var server2 = http.createServer(function(req, res) {
   res.writeHead(200);
-  res.end('hello word');
+  res.end(port);
 }).listen(port);
