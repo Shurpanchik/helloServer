@@ -104,15 +104,16 @@ function (session) {
 );
 bot.dialog('/start', [
     function (session) {
-		answerMap.clear();
-        session.beginDialog('/ready')
-    },
+		builder.Prompts.choice(session,"Choose time","09:00|10:00|11:00|12:00|13:00|14:00|15:00|16:00|17:00|18:00|19:00|20:00" , {
+listStyle: builder.ListStyle.button,
+});
+    }
 ]);
 bot.dialog('/menu', [
     function (session) {
 		answerMap.clear();
         session.beginDialog('/ready')
-    },
+    }
 ]);
 
 bot.beginDialogAction('start', '/start', {matches: /^\/?start/i});
