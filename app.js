@@ -1,38 +1,33 @@
-var http = require('http');
-var answer = 'YES';
-var port = process.env.PORT || 3000;
-/*
-var serverSite = http.createServer(function(req, res) {
-  res.writeHead(200);
-  if (req.method == 'POST'){
-  if (req.url == '/YES'){
-  answer='YES';
-  }else{
-  answer='NO';}
+/*-----------------------------------------------------------------------------
+A simple "Hello World" bot for the Microsoft Bot Framework. 
+-----------------------------------------------------------------------------*/
 
-  }
-   var body = '<html>'+
-    '<head>'+
-    '<meta http-equiv="Content-Type" content="text/html; '+
-    'charset=UTF-8" />'+
-    '</head>'+
-    '<body>'+
-    '<p><b>Submit button:</b><Br>'+
-    '<form action= "/YES" method="post">'+
-   '<input type="submit" name="YES" value="YES"> '+
-      '</form>'+
-	'<form action= "/NO" method="post">'+
-   '<input type="submit" name="NO" value="NO"> '+
-    '</form>'+
-    '<p> You answer is '+ answer+'</p>'+
-      
-    '</body>'+
-    '</html>';
+var restify  = require('restify');
+var builder  = require('botbuilder');
 
-  res.end(body);
-}).listen(8888);
-*/
-var server2 = http.createServer(function(req, res) {
-  res.writeHead(200);
-  res.end(port+" "+process.env.IP_ADDRESS);
-}).listen(port);
+
+//=========================================================
+// Bot Setup
+//=========================================================
+
+// Setup Restify Server
+var server = restify.createServer();
+server.listen(process.env.port || process.env.PORT || 8888, function () {
+   console.log('%s listening to %s', server.name, server.url); 
+});
+  
+// Create chat bot
+var connector = new builder.ChatConnector({
+    appId: 'cc4c2816-902d-41af-86c8-f9e3fa26ccd5',
+    appPassword: 'QG3nqCFWbzgBN68eKcdTLEq'
+});
+var bot = new builder.UniversalBot(connector);
+server.post('/api/messages', connector.listen());
+//=========================================================
+// Dialogen
+//=========================================================
+bot.dialog('/', function (session) {
+	builder.Prompts.choice(session,"Choose time","09:00|10:00|11:00|12:00|13:00|14:00|15:00|16:00|17:00|18:00|19:00|20:00" , {
+		listStyle: builder.ListStyle.button,
+	});
+});
